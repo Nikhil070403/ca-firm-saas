@@ -1,0 +1,105 @@
+.import-ledger__intro {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.import-ledger__intro em {
+  font-style: normal;
+  color: var(--color-primary-hover);
+  font-weight: 600;
+}
+
+.import-ledger__template {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 16px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-primary-hover);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.import-ledger__template:hover {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-hover);
+}
+
+.import-ledger__drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  text-align: center;
+}
+
+.import-ledger__drop:hover {
+  border-color: var(--color-primary-hover);
+  background: var(--color-bg);
+}
+
+.import-ledger__drop svg {
+  color: var(--color-primary-hover);
+}
+
+.import-ledger__drop span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  word-break: break-all;
+}
+
+.import-ledger__result {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  font-size: 13px;
+}
+
+.import-ledger__result > p {
+  margin: 0;
+}
+
+.import-ledger__errors {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+}
+
+.import-ledger__errors > p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-warning);
+}
+
+.import-ledger__errors ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.import-ledger__errors li {
+  margin-bottom: 2px;
+}

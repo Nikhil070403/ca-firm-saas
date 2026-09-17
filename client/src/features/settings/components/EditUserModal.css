@@ -1,0 +1,45 @@
+.edit-user__services {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.edit-user__service {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.14s ease, background 0.14s ease;
+  user-select: none;
+}
+
+.edit-user__service:hover:not(.is-disabled) {
+  border-color: var(--color-primary-hover);
+}
+
+.edit-user__service:has(input:checked) {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.edit-user__service.is-disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.edit-user__service input {
+  accent-color: var(--color-primary);
+  margin: 0;
+}
+
+.edit-user__hint {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--color-text-faint);
+}

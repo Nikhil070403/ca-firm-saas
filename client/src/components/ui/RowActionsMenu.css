@@ -1,0 +1,69 @@
+.row-actions {
+  position: relative;
+  display: inline-flex;
+}
+
+.row-actions__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background 0.13s ease, color 0.13s ease;
+}
+
+.row-actions__trigger:hover,
+.row-actions__trigger[aria-expanded='true'] {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.row-actions__menu {
+  /* Fixed + portal'd to <body>: escapes the table's overflow container so
+     the menu overlaps the table instead of being clipped inside it. The
+     trigger computes top/left inline; width must stay in sync with
+     MENU_WIDTH in RowActionsMenu.jsx. */
+  position: fixed;
+  width: 160px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 5px;
+  z-index: 400;
+}
+
+.row-actions__item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.row-actions__item:hover {
+  background: var(--color-bg);
+}
+
+.row-actions__item.is-danger {
+  color: var(--color-danger);
+}
+
+.row-actions__item.is-danger:hover {
+  background: var(--color-danger-soft);
+}

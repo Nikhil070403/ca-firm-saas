@@ -1,0 +1,30 @@
+  {
+    "name": "ca-firm-saas",
+    "private": true,
+    "version": "1.0.0",
+    "description": "Unified CRM, Khata Book, Reminder, Client, Task, Document, Billing and Analytics platform for CA firms",
+    "workspaces": [
+      "server",
+      "client"
+    ],
+"scripts": {
+  "dev": "concurrently -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+  "dev:server": "npm run dev -w server",
+  "dev:client": "npm run dev -w client",
+
+  "build": "npm run build -w client",
+  "build:client": "npm run build -w client",
+
+  "start": "npm start -w server",
+
+  "lint": "npm run lint -w server && npm run lint -w client",
+  "test": "npm run test -w server && npm run test -w client",
+  "seed": "npm run seed -w server"
+},
+    "devDependencies": {
+      "concurrently": "^9.1.0"
+    },
+    "engines": {
+      "node": ">=20.0.0"
+    }
+  }

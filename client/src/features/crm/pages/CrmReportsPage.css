@@ -1,0 +1,112 @@
+.crm-reports {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.crm-reports__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.crm-reports__stat-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.crm-reports__stat-value {
+  margin: 6px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.crm-reports__funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.crm-reports__funnel-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+}
+
+.crm-reports__funnel-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.crm-reports__funnel-track {
+  background: var(--color-bg);
+  border-radius: 999px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.crm-reports__funnel-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-info);
+  min-width: 2px;
+  transition: width 0.4s ease;
+}
+
+.crm-reports__funnel-bar.is-won { background: var(--color-success); }
+.crm-reports__funnel-bar.is-lost,
+.crm-reports__funnel-bar.is-not_interested { background: var(--color-danger); }
+.crm-reports__funnel-bar.is-new { background: var(--color-primary); }
+.crm-reports__funnel-bar.is-callback,
+.crm-reports__funnel-bar.is-proposal,
+.crm-reports__funnel-bar.is-negotiation { background: var(--color-warning); }
+
+.crm-reports__funnel-count {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.crm-reports__tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.crm-reports__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.crm-reports__table th {
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.crm-reports__table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.crm-reports__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.crm-reports__empty {
+  text-align: center;
+  color: var(--color-text-faint);
+  padding: 18px 0;
+}

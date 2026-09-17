@@ -1,0 +1,210 @@
+.auth-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ---------- Left: card floating over a photographic backdrop ---------- */
+
+.auth-layout__photo-side {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.auth-layout__photo-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(480px 320px at 18% 22%, rgba(253, 224, 71, 0.16), transparent 60%),
+    radial-gradient(560px 380px at 82% 78%, rgba(56, 189, 248, 0.18), transparent 60%),
+    linear-gradient(160deg, #1e293b 0%, #0f172a 55%, #1e3a8a 100%);
+  filter: blur(2px);
+}
+
+.auth-layout__photo-backdrop::after {
+  /* Faint skyline silhouette, purely decorative */
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(2, 6, 23, 0.55) 0px,
+    rgba(2, 6, 23, 0.55) 26px,
+    transparent 26px,
+    transparent 34px
+  );
+  clip-path: polygon(
+    0% 100%, 0% 60%, 4% 60%, 4% 40%, 9% 40%, 9% 70%, 14% 70%, 14% 30%,
+    19% 30%, 19% 55%, 24% 55%, 24% 20%, 29% 20%, 29% 65%, 35% 65%, 35% 45%,
+    41% 45%, 41% 15%, 47% 15%, 47% 60%, 53% 60%, 53% 35%, 59% 35%, 59% 70%,
+    65% 70%, 65% 25%, 71% 25%, 71% 50%, 77% 50%, 77% 18%, 83% 18%, 83% 62%,
+    89% 62%, 89% 40%, 95% 40%, 95% 68%, 100% 68%, 100% 100%
+  );
+  opacity: 0.9;
+}
+
+.auth-layout__card {
+  /* Pinned to the light palette regardless of the app's theme toggle — a
+     frosted card over a photo backdrop only reads correctly one way, and
+     nobody has switched to dark mode yet at this point in the app anyway.
+     Redeclaring the tokens here overrides the dark [data-theme] cascade for
+     every FormField/Input/Button rendered inside. */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-faint: #94a3b8;
+  --color-primary-soft: #eff6ff;
+
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px -20px rgba(2, 6, 23, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  padding: 36px 40px 40px;
+  color: #0f172a;
+}
+
+.auth-layout__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 15px;
+  color: #0f172a;
+  margin-bottom: 28px;
+  line-height: 1.3;
+}
+
+.auth-layout__brand small {
+  font-weight: 500;
+  font-size: 11.5px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.auth-layout__brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ---------- Right: dark "Solution Hub" panel ---------- */
+
+.auth-layout__aside {
+  position: relative;
+  background:
+    radial-gradient(800px 400px at 85% 10%, rgba(59, 130, 246, 0.3), transparent),
+    linear-gradient(160deg, #0f172a 0%, #1e3a8a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.auth-layout__network {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: auto;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.auth-layout__aside-content {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  color: #fff;
+}
+
+.auth-layout__eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #93c5fd;
+}
+
+.auth-layout__aside-content h2 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+.auth-layout__lead {
+  opacity: 0.8;
+  line-height: 1.6;
+  font-size: 14.5px;
+  margin: 0 0 30px;
+}
+
+.auth-layout__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-layout__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.auth-layout__feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
+}
+
+.auth-layout__features strong {
+  display: block;
+  font-size: 13.5px;
+  margin-bottom: 1px;
+}
+
+.auth-layout__features div span {
+  font-size: 12.5px;
+  opacity: 0.75;
+  line-height: 1.45;
+}
+
+@media (max-width: 1100px) {
+  .auth-layout__features div span { display: none; }
+}
+
+/* Responsive overrides last so they win the cascade over the unconditional
+   rules above at matching viewport widths. */
+@media (max-width: 900px) {
+  .auth-layout { grid-template-columns: 1fr; }
+  .auth-layout__aside { display: none; }
+}
