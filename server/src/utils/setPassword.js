@@ -1,14 +1,13 @@
 require('../models/registerModels');
 
-const bcrypt = require('bcryptjs');
 const { connectDB, disconnectDB } = require('../config/db');
 const User = require('../features/auth/models/User.model');
 const logger = require('./logger');
 
 /**
- * Dev/admin utility: set a user's password from the command line, hashing it
- * properly. Editing `passwordHash` by hand in Compass can never work — login
- * compares a bcrypt hash, not plain text.
+ * Dev/demo utility: set a user's password from the command line. Stored in
+ * plain text (demo build) — you can also just edit `passwordHash` by hand in
+ * Compass since login compares the raw value.
  *
  * Usage: npm run set-password -- <email> <newPassword>
  */
@@ -20,7 +19,7 @@ async function run() {
   }
 
   await connectDB();
-  const passwordHash = await bcrypt.hash(newPassword, 12);
+  const passwordHash = newPassword;
   const user = await User.findOneAndUpdate(
     { email: email.toLowerCase(), isDeleted: false },
     { $set: { passwordHash } }

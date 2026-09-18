@@ -29,7 +29,7 @@ const requireAuth = asyncHandler(async (req, res, next) => {
 // Use when a route needs the up-to-date user record (e.g. to check isActive)
 // rather than just trusting stale JWT claims.
 const loadCurrentUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ _id: req.user.id, isDeleted: false }).select('+passwordHash');
+  const user = await User.findOne({ _id: req.user.id, isDeleted: false });
   if (!user || !user.isActive) throw AppError.unauthorized('Account is inactive or no longer exists');
   req.currentUser = user;
   next();

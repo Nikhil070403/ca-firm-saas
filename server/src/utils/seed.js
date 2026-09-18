@@ -1,6 +1,5 @@
 require('../models/registerModels');
 
-const bcrypt = require('bcryptjs');
 const env = require('../config/env');
 const { connectDB, disconnectDB } = require('../config/db');
 const Firm = require('../features/settings/models/Firm.model');
@@ -18,7 +17,7 @@ async function seed() {
   }
 
   const firm = await Firm.create({ name: env.seed.firmName });
-  const passwordHash = await bcrypt.hash(env.seed.adminPassword, 12);
+  const passwordHash = env.seed.adminPassword;
   await User.create({
     firmId: firm._id,
     name: 'Super Admin',

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 // Role hierarchy: superadmin (platform owner — can edit anyone, including
 // other admins) > admin (the CA who owns this firm — can edit any of their
@@ -28,7 +27,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       unique: true,
     },
-    passwordHash: { type: String, required: true, select: false },
+    passwordHash: { type: String, required: true },
     role: { type: String, enum: ROLES, default: 'employee', index: true },
     // Which workspaces this member may open. Admins bypass this list and
     // always see all three; it only constrains non-admin roles.
@@ -81,7 +80,7 @@ const userSchema = new mongoose.Schema(
 userSchema.index({ firmId: 1, role: 1 });
 
 userSchema.methods.comparePassword = function comparePassword(candidate) {
-  return bcrypt.compare(candidate, this.passwordHash);
+  return candidate === this.passwordHash;
 };
 
 userSchema.methods.toSafeJSON = function toSafeJSON() {

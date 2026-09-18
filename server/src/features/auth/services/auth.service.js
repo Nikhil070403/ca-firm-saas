@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const ms = require('../../../utils/parseDuration');
 const AppError = require('../../../utils/AppError');
 const authRepository = require('../repositories/auth.repository');
@@ -17,8 +16,6 @@ const twoFactor = require('../../../utils/twoFactor');
 const { parseUserAgent } = require('../../../utils/parseUserAgent');
 
 const TWO_FA_LOGIN_PURPOSE = '2fa_login';
-
-const SALT_ROUNDS = 12;
 
 async function issueSession(user, meta = {}) {
   const rawRefreshToken = generateRefreshTokenValue();
@@ -46,7 +43,7 @@ async function register({ firmName, name, email, password }) {
   if (existing) throw AppError.conflict('An account with this email already exists');
 
   const firm = await authRepository.createFirm({ name: firmName });
-  const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+  const passwordHash = password;
   // The person who stands up a brand-new firm workspace owns it outright —
   // they land as superadmin, then invite an admin (CA), employees and
   // clients into it from Team.
@@ -191,7 +188,7 @@ async function changePassword(userId, currentPassword, newPassword, currentSessi
     throw AppError.badRequest('New password must be different from the current one');
   }
 
-  const passwordHash = await bcrypt.hash(newPassword, 12);
+  const passwordHash = newPassword;
   await authRepository.updateUserById(user._id, { passwordHash });
 
   if (currentSessionId) {
@@ -290,7 +287,7 @@ async function resetPassword(token, newPassword) {
     throw AppError.unauthorized('Reset link is invalid or has expired');
   }
 
-  const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
+  const passwordHash = newPassword;
   const user = await authRepository.updateUserById(decoded.userId, {
     passwordHash,
     isEmailVerified: true,

@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const bcrypt = require('bcryptjs');
 const userRepository = require('../repositories/user.repository');
 const Client = require('../../clients/models/Client.model');
 const AppError = require('../../../utils/AppError');
@@ -9,8 +8,6 @@ const { sendMail } = require('../../../config/mailer');
 const { passwordResetEmail } = require('../../../utils/emailTemplates');
 const { canManageTargetRole, assignableRoles } = require('../../../middlewares/rbac.middleware');
 const authRepository = require('../../auth/repositories/auth.repository');
-
-const SALT_ROUNDS = 12;
 
 // Clients never get the Accounts workspace — enforced here so it can never
 // be reintroduced by an admin toggling allowedServices, whatever the UI does.
@@ -51,7 +48,7 @@ async function createUser(firmId, actor, data) {
   if (existing) throw AppError.conflict('A user with this email already exists in your firm');
 
   const tempPassword = crypto.randomBytes(9).toString('base64url');
-  const passwordHash = await bcrypt.hash(tempPassword, SALT_ROUNDS);
+  const passwordHash = tempPassword;
 
   const linkedClientId = await resolveLinkedClientId(firmId, data.role, data.linkedClientId);
 
@@ -110,14 +107,14 @@ async function updateUser(firmId, id, actor, rawUpdates) {
   );
 
   // Password reset by an admin. Deliberately OUTSIDE the whitelist — the raw
-  // value is consumed here (hashed, never stored as-is) and the reset is
+  // value is consumed here (stored as-is in this demo build) and the reset is
   // already gated by assertCanManage above, so an admin can set a new
   // password only for accounts they manage (their employees/clients; a
   // superadmin for anyone). Every session of the target is revoked so the
   // old password can't live on in an open tab somewhere.
   const passwordChanged = typeof rawUpdates.password === 'string' && rawUpdates.password.length > 0;
   if (passwordChanged) {
-    updates.passwordHash = await bcrypt.hash(rawUpdates.password, SALT_ROUNDS);
+    updates.passwordHash = rawUpdates.password;
   }
 
   if (updates.role && updates.role !== target.role) {
